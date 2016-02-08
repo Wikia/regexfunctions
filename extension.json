@@ -1,0 +1,33 @@
+{
+	"name": "RegexFunctions",
+	"version": "1.5.0",
+	"author": "Ryan Schmidt",
+	"url": "https://www.mediawiki.org/wiki/Extension:RegexFunctions",
+	"descriptionmsg": "regexfunctions-desc",
+	"type": "parserhook",
+	"MessagesDirs": {
+		"RegexFunctions": [
+			"i18n"
+		]
+	},
+	"ExtensionMessagesFiles": {
+		"RegexFunctionsMagic": "RegexFunctions.i18n.magic.php"
+	},
+	"Hooks": {
+		"ParserFirstCallInit": [
+			"RegexFunctionsHooks::onParserFirstCallInit"
+		],
+		"ParserClearState": [
+			"RegexFunctionsHooks::onParserClearState"
+		]
+	},
+	"config": {
+		"RegexFunctionsPerPage": 10,
+		"RegexFunctionsAllowModifiers": true,
+		"RegexFunctionsAllowE": false,
+		"RegexFunctionsAllowOptions": true,
+		"RegexFunctionsLimit": -1,
+		"RegexFunctionsDisable": []
+	},
+	"manifest_version": 1
+}
