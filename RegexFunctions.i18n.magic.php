@@ -19,6 +19,20 @@ $magicWords['ar'] = array(
 	'rreplace' => array( 0, 'استبدال_ريجيكس' ),
 );
 
+/** Egyptian Arabic (مصرى) */
+$magicWords['arz'] = array(
+	'rmatch' => array( 0, 'مطابقه_ريجيكس' ),
+	'rsplit' => array( 0, 'فصل_ريجيكس' ),
+	'rreplace' => array( 0, 'استبدال_ريجيكس' ),
+);
+
+/** Chuvash (Чӑвашла) */
+$magicWords['cv'] = array(
+	'rmatch' => array( 0, 'rmatch' ),
+	'rsplit' => array( 0, 'rsplit' ),
+	'rreplace' => array( 0, 'rreplace' ),
+);
+
 /** German (Deutsch) */
 $magicWords['de'] = array(
 	'rmatch' => array( 0, 'r_zuordnen' ),
@@ -85,4 +99,16 @@ $magicWords['sr-el'] = array(
 	'rmatch' => array( 0, 'rpoklopi' ),
 	'rsplit' => array( 0, 'rrazdvoji', 'rpodeli' ),
 	'rreplace' => array( 0, 'rzameni' ),
+);
+
+/** Simplified Chinese (中文（简体）‎) */
+$magicWords['zh-hans'] = array(
+	'rmatch' => array( 0, '重新匹配' ),
+	'rsplit' => array( 0, '重新分解' ),
+	'rreplace' => array( 0, '重新取代' ),
+);
+
+/** Traditional Chinese (中文（繁體）‎) */
+$magicWords['zh-hant'] = array(
+	'rmatch' => array( 0, '重新分配' ),
 );
