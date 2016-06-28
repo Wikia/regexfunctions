@@ -45,7 +45,6 @@ $wgRegexFunctionsLimit = -1;
 $wgRegexFunctionsDisable = array();
 
 class ExtRegexFunctions {
-	public static $rmatches; //Holder for rmatch's matches to pass into closure callback function.
 	private static $num = 0;
 	private static $modifiers = array(
 		'i', 'm', 's', 'x', 'A', 'D', 'S', 'U', 'X', 'J', 'u', 'e'
@@ -90,25 +89,39 @@ class ExtRegexFunctions {
 			}
 			return $notfound;
 		}
-		self::$rmatches = $matches;
+
 		// change all backslashes to $
 		$return = str_replace( '\\', '%$', $return );
-		$slashyReplacements = [
+		$return = preg_replace_callback(
 			'/%?\$%?\$([0-9]+)/',
+			function ( $_callbackMatches ) use ( $matches ) {
+				return array_key_exists($_callbackMatches[1], $matches) ? $matches[$_callbackMatches[1]][1] : '';
+			},
+			$return
+		);
+		$return = preg_replace_callback(
 			'/%?\$%?\$\{([0-9]+)\}/',
+			function ( $_callbackMatches ) use ( $matches ) {
+				return array_key_exists($_callbackMatches[1], $matches) ? $matches[$_callbackMatches[1]][1] : '';
+			},
+			$return
+		);
+		$return = preg_replace_callback(
 			'/%?\$([0-9]+)/',
-			'/%?\$\{([0-9]+)\}/'
-		];
-		foreach ( $slashyReplacements as $regex ) {
-			$return = preg_replace_callback(
-				$regex,
-				function ( $_matches ) {
-					return array_key_exists($_matches[1], ExtRegexFunctions::$rmatches) ? ExtRegexFunctions::$rmatches[$_matches[1]][0] : '';
-				},
-				$return
-			);
-		}
+			function ( $_callbackMatches ) use ( $matches ) {
+				return array_key_exists($_callbackMatches[1], $matches) ? $matches[$_callbackMatches[1]][0] : '';
+			},
+			$return
+		);
+		$return = preg_replace_callback(
+			'/%?\$\{([0-9]+)\}/',
+			function ( $_callbackMatches ) use ( $matches ) {
+				return array_key_exists($_callbackMatches[1], $matches) ? $matches[$_callbackMatches[1]][0] : '';
+			},
+			$return
+		);
 		$return = str_replace( '%$', '\\', $return );
+
 		return $return;
 	}
 
@@ -168,8 +181,8 @@ class ExtRegexFunctions {
 		if( preg_match( '/^\/(.*)([^\\\\])\/(.*?)$/', $pattern, $matches ) ) {
 			$pat = preg_replace_callback(
 				'/([^\\\\])?\(\?(.*\:)?(.*)\)/U',
-				function ( $_matches ) {
-					return "{$_matches[1]}(" . self::cleanupInternal( $_matches[2] ) . "{$_matches[3]})";
+				function ( $_callbackMatches ) {
+					return "{$_callbackMatches[1]}(" . self::cleanupInternal( $_callbackMatches[2] ) . "{$_callbackMatches[3]})";
 				},
 				$matches[1] . $matches[2]
 			);
@@ -187,8 +200,8 @@ class ExtRegexFunctions {
 		} else {
 			$pat = preg_replace_callback(
 				'/([^\\\\])?\(\?(.*\:)?(.*)\)/U',
-				function ( $_matches ) {
-					return "{$_matches[1]}(" . self::cleanupInternal( $_matches[2] ) . "{$_matches[3]})";
+				function ( $_callbackMatches ) {
+					return "{$_callbackMatches[1]}(" . self::cleanupInternal( $_callbackMatches[2] ) . "{$_callbackMatches[3]})";
 				},
 				$pattern
 			);
