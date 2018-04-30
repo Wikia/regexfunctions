@@ -1,0 +1,56 @@
+{
+	"name": "RegexFunctions",
+	"version": "1.5.0",
+	"author": "Ryan Schmidt",
+	"url": "https://www.mediawiki.org/wiki/Extension:RegexFunctions",
+	"descriptionmsg": "regexfunctions-desc",
+	"type": "parserhook",
+	"MessagesDirs": {
+		"RegexFunctions": [
+			"i18n"
+		]
+	},
+	"ExtensionMessagesFiles": {
+		"RegexFunctionsMagic": "RegexFunctions.i18n.magic.php"
+	},
+	"Hooks": {
+		"ParserFirstCallInit": "RegexFunctionsHooks::onParserFirstCallInit",
+		"ParserClearState": "RegexFunctionsHooks::onParserClearState"
+	},
+	"AutoloadClasses": {
+		"RegexFunctionsHooks": "RegexFunctions.hooks.php"
+	},
+	"config": {
+		"RegexFunctionsPerPage": {
+			"value": 10,
+			"path": false,
+			"descriptionmsg": "regexfunctions-config-regexfunctionsperpage",
+			"public": false
+		},
+		"RegexFunctionsAllowModifiers": {
+			"value": true,
+			"path": false,
+			"descriptionmsg": "regexfunctions-config-regexfunctionsallowmodifiers",
+			"public": false
+		},
+		"RegexFunctionsAllowOptions": {
+			"value": true,
+			"path": false,
+			"descriptionmsg": "regexfunctions-config-regexfunctionsallowoptions",
+			"public": false
+		},
+		"RegexFunctionsLimit": {
+			"value": -1,
+			"path": false,
+			"descriptionmsg": "regexfunctions-config-regexfunctionslimit",
+			"public": false
+		},
+		"RegexFunctionsDisable": {
+			"value": [],
+			"path": false,
+			"descriptionmsg": "regexfunctions-config-regexfunctionsdisable",
+			"public": false
+		}
+	},
+	"manifest_version": 2
+}
