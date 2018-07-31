@@ -30,11 +30,11 @@ class RegexFunctionsHooks {
 
 	static public function rmatch(&$parser, $string = '', $pattern = '', $return = '', $notfound = '', $offset = 0) {
 		global $wgRegexFunctionsPerPage, $wgRegexFunctionsAllowModifiers, $wgRegexFunctionsDisable;
-		if(in_array('rmatch', $wgRegexFunctionsDisable)) {
+		if (in_array('rmatch', $wgRegexFunctionsDisable)) {
 			return;
 		}
 		self::$num++;
-		if(self::$num > $wgRegexFunctionsPerPage) {
+		if (self::$num > $wgRegexFunctionsPerPage) {
 			return;
 		}
 		$pattern = self::sanitize(
@@ -92,11 +92,11 @@ class RegexFunctionsHooks {
 
 	static public function rsplit(&$parser, $string = '', $pattern = '', $piece = 0) {
 		global $wgRegexFunctionsPerPage, $wgRegexFunctionsAllowModifiers, $wgRegexFunctionsLimit, $wgRegexFunctionsDisable;
-		if(in_array('rsplit', $wgRegexFunctionsDisable)) {
+		if (in_array('rsplit', $wgRegexFunctionsDisable)) {
 			return;
 		}
 		self::$num++;
-		if(self::$num > $wgRegexFunctionsPerPage) {
+		if (self::$num > $wgRegexFunctionsPerPage) {
 			return;
 		}
 		$pattern = self::sanitize(
@@ -106,14 +106,14 @@ class RegexFunctionsHooks {
 		$res = preg_split($pattern, $string, $wgRegexFunctionsLimit);
 		$p = (int) $piece;
 		// allow negative pieces to work from the end of the array
-		if($p < 0) {
+		if ($p < 0) {
 			$p = $p + count($res);
 		}
 		// sanitation for pieces that don't exist
-		if($p < 0) {
+		if ($p < 0) {
 			$p = 0;
 		}
-		if($p >= count($res)) {
+		if ($p >= count($res)) {
 			$p = count($res) - 1;
 		}
 		return $res[$p];
@@ -121,11 +121,11 @@ class RegexFunctionsHooks {
 
 	static public function rreplace(&$parser, $string = '', $pattern = '', $replace = '') {
 		global $wgRegexFunctionsPerPage, $wgRegexFunctionsAllowModifiers, $wgRegexFunctionsLimit, $wgRegexFunctionsDisable;
-		if(in_array('rreplace', $wgRegexFunctionsDisable)) {
+		if (in_array('rreplace', $wgRegexFunctionsDisable)) {
 			return;
 		}
 		self::$num++;
-		if(self::$num > $wgRegexFunctionsPerPage) {
+		if (self::$num > $wgRegexFunctionsPerPage) {
 			return;
 		}
 		$pattern = self::sanitize(
@@ -143,7 +143,7 @@ class RegexFunctionsHooks {
 
 	// santizes a regex pattern
 	static private function sanitize($pattern, $m = false) {
-		if(preg_match('/^\/(.*)([^\\\\])\/(.*?)$/', $pattern, $matches)) {
+		if (preg_match('/^\/(.*)([^\\\\])\/(.*?)$/', $pattern, $matches)) {
 			$pat = preg_replace_callback(
 				'/([^\\\\])?\(\?(.*\:)?(.*)\)/U',
 				function ($_callbackMatches) {
@@ -152,10 +152,10 @@ class RegexFunctionsHooks {
 				$matches[1] . $matches[2]
 			);
 			$ret = '/' . $pat . '/';
-			if($m) {
+			if ($m) {
 				$mod = '';
 				foreach(self::$modifiers as $val) {
-					if(strpos($matches[3], $val) !== false) {
+					if (strpos($matches[3], $val) !== false) {
 						$mod .= $val;
 					}
 				}
@@ -184,7 +184,7 @@ class RegexFunctionsHooks {
 			return '';
 		}
 		foreach (self::$options as $opt) {
-			if(strpos($str, $opt) !== false) {
+			if (strpos($str, $opt) !== false) {
 				$ret .= $opt;
 			}
 		}
