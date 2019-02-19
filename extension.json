@@ -5,6 +5,9 @@
 	"url": "https://www.mediawiki.org/wiki/Extension:RegexFunctions",
 	"descriptionmsg": "regexfunctions-desc",
 	"type": "parserhook",
+	"requires": {
+		"MediaWiki": ">= 1.29.0"
+	},
 	"MessagesDirs": {
 		"RegexFunctions": [
 			"i18n"
